@@ -1,0 +1,34 @@
+{
+	"nodes":[
+		{"id":"n_geometria","type":"text","text":"### Geometria Analitica e Trasformazioni\nGeograficamente, le radici reali sono le intersezioni con l'iperpiano $y=0$.\n\nIl *Cambio di base* corrisponde a una **traslazione** del sistema di riferimento affine, spostando l'origine proprio sulla radice $c$.","x":-600,"y":960,"width":560,"height":200,"color":"6"},
+		{"id":"n_autovalori","type":"text","text":"### Autovalori e Autovettori\nCostruendo la **Matrice Compagna** dai coefficienti di un polinomio, il polinomio stesso diventa il **Polinomio Caratteristico** della matrice: $\\det(A - \\lambda I) = 0$.\n\n**Boom:** Le radici del polinomio coincidono con gli Autovalori della matrice!","x":160,"y":140,"width":570,"height":220,"color":"5"},
+		{"id":"n_matrici","type":"text","text":"### Matrici Invertibili\nUna matrice quadrata $A$ è **invertibile** (esiste $A^{-1}$) se e solo se $\\det(A) \\neq 0$.\n\nQuesto garantisce che l'applicazione lineare associata è biunivoca (un *Isomorfismo*). Il rango della matrice è massimo.","x":1400,"y":180,"width":500,"height":240,"color":"2"},
+		{"id":"n_spazi","type":"text","text":"### Spazi Vettoriali e Combinazioni Lineari\nI polinomi non sono solo funzioni, sono **vettori** in uno spazio $\\mathbb{R}_n[x]$.\n\nI monomi $\\{1, x, x^2, \\dots, x^n\\}$ formano la **Base Canonica**. I coefficienti del polinomio sono le *coordinate* del vettore rispetto a questa base.","x":280,"y":-740,"width":560,"height":220,"color":"4"},
+		{"id":"n_cambio_base","type":"text","text":"### Cambio di Base\nCosa succede se cambiamo la base?\nPassare dalla base canonica alla **Base di Taylor** $\\{1, (x-c), (x-c)^2\\}$ è un Cambio di Base.\n\nEvidenziare le radici significa annullare le prime coordinate in questa nuova base.","x":1320,"y":-550,"width":480,"height":210,"color":"2"},
+		{"id":"n_applicazioni","type":"text","text":"### Applicazioni Lineari (Funzioni tra Spazi)\nLe operazioni sui polinomi (come la **Derivata**) sono applicazioni lineari.\n\nOgni applicazione lineare è descrivibile da una **Matrice Associata** rispetto a una base. Il **Kernel** (Nucleo) dell'operatore di valutazione $E_c(P) = P(c)$ è generato dai polinomi divisibili per $(x-c)$.","x":-620,"y":530,"width":580,"height":200,"color":"3"},
+		{"id":"n_polinomi","type":"text","text":"### Polinomi e Radici (START)\nL'inizio del viaggio.\nUn polinomio $P(x)$ ha radici quando $P(c) = 0$.\n\n**Focus:** Teorema di Ruffini, Molteplicità algebrica, Teorema Fondamentale dell'Algebra.","x":-1040,"y":-160,"width":440,"height":220,"color":"1"},
+		{"id":"n_span","type":"text","text":"### Span e Generatori\nLo **Span** è l'insieme di tutte le combinazioni lineari di $k$ vettori. È il *sottospazio più piccolo* che li contiene.\n\n- Se i vettori sono indipendenti, formano una **Base**.\n- Geometricamente, in $\\mathbb{R}^3$, due vettori linearmente indipendenti generano un piano.","x":-255,"y":-400,"width":700,"height":220,"color":"4"},
+		{"id":"n_ortogonalita","type":"text","text":"### Prodotti Scalari e Ortogonalità\nIn spazi vettoriali euclidei, possiamo definire un **prodotto scalare** tra polinomi (tramite integrali, es: $\\int P(x)Q(x)dx$).\n\nQuesto permette di trovare proiezioni ortogonali, distanze e di costruire basi ortogonali (es. Polinomi di Legendre).","x":320,"y":760,"width":630,"height":200,"color":"6"},
+		{"id":"n_sistemi","type":"text","text":"### Sistemi Lineari e Cramer\nUn sistema lineare si può vedere come un'uguaglianza tra vettori: $Ax = b$, dove $A$ è la matrice dei coefficienti.\n\n- Il **Teorema di Cramer** risolve i sistemi quadrati con $\\det(A) \\neq 0$.\n- Risolvere $Ax = b$ significa chiedersi: in che modo posso combinare le colonne di $A$ (tramite coordinate $x$) per ottenere $b$?","x":1160,"y":800,"width":630,"height":220,"color":"7"}
+	],
+	"edges":[
+		{"id":"e_pol_spazi","fromNode":"n_polinomi","fromSide":"top","toNode":"n_spazi","toSide":"left","label":"Astrazione: Diventano Vettori"},
+		{"id":"e_spazi_base","fromNode":"n_spazi","fromSide":"right","toNode":"n_cambio_base","toSide":"left","label":"Matrici di Passaggio"},
+		{"id":"e_pol_cambio","fromNode":"n_polinomi","fromSide":"right","toNode":"n_cambio_base","toSide":"bottom","label":"Ruffini = Base di Taylor"},
+		{"id":"e_spazi_app","fromNode":"n_spazi","fromSide":"bottom","toNode":"n_applicazioni","toSide":"top","label":"Trasformazioni Lineari"},
+		{"id":"e_pol_app","fromNode":"n_polinomi","fromSide":"bottom","toNode":"n_applicazioni","toSide":"left","label":"Nucleo (Kernel)"},
+		{"id":"e_app_auto","fromNode":"n_applicazioni","fromSide":"right","toNode":"n_autovalori","toSide":"left","label":"Studio della Matrice"},
+		{"id":"e_pol_auto","toFloating":false,"fromNode":"n_polinomi","fromSide":"bottom","toNode":"n_autovalori","toSide":"top","label":"Matrice Compagna"},
+		{"id":"e_app_geo","fromNode":"n_applicazioni","fromSide":"bottom","toNode":"n_geometria","toSide":"top","label":"Significato Grafico"},
+		{"id":"e_spazi_orto","fromFloating":false,"toFloating":false,"fromNode":"n_applicazioni","fromSide":"bottom","toNode":"n_ortogonalita","toSide":"left","label":"Spazi Metrici"},
+		{"id":"e_spazi_span","fromNode":"n_spazi","fromSide":"bottom","toNode":"n_span","toSide":"top","label":"Combinazioni Lineari"},
+		{"id":"e_span_sistemi","fromNode":"n_span","fromSide":"right","toNode":"n_sistemi","toSide":"top","label":"Combinare colonne per ottenere b"},
+		{"id":"e_cambio_matrici","fromNode":"n_cambio_base","fromSide":"bottom","toNode":"n_matrici","toSide":"right","label":"Le Matrici di Passaggio sono Invertibili"},
+		{"id":"e_matrici_sistemi","toFloating":false,"fromNode":"n_matrici","fromSide":"bottom","toNode":"n_sistemi","toSide":"top","label":"Soluzione Unica (Cramer)"},
+		{"id":"e_matrici_app","fromNode":"n_matrici","fromSide":"left","toNode":"n_applicazioni","toSide":"right","label":"Isomorfismo (Biunivoca)"}
+	],
+	"metadata":{
+		"version":"1.0-1.0",
+		"frontmatter":{}
+	}
+}
