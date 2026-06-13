@@ -5,7 +5,6 @@ tags:
 aliases:
   - MOC Prodotto Scalare
 ---
-
 # MOC: Prodotto Scalare e Teorema Spettrale
 
 In questo modulo aggiungiamo la "geometria" agli spazi vettoriali: introduciamo il concetto di distanza, lunghezza e angolo tramite il prodotto scalare, per arrivare al potentissimo Teorema Spettrale per le matrici simmetriche.

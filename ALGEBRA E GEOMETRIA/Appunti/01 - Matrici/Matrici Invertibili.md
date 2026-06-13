@@ -8,7 +8,6 @@ aliases:
   - Gruppo Lineare
   - GL(n)
 ---
-
 # Matrici Invertibili
 
 ## Definizione

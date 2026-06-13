@@ -14,10 +14,10 @@
 	"edges":[
 		{"id":"e_pol_spazi","fromNode":"n_polinomi","fromSide":"top","toNode":"n_spazi","toSide":"left","label":"Astrazione: Diventano Vettori"},
 		{"id":"e_spazi_base","fromNode":"n_spazi","fromSide":"right","toNode":"n_cambio_base","toSide":"left","label":"Matrici di Passaggio"},
-		{"id":"e_pol_cambio","fromNode":"n_polinomi","fromSide":"right","toNode":"n_cambio_base","toSide":"bottom","label":"Ruffini = Base di Taylor"},
+		{"id":"e_pol_cambio","fromFloating":false,"fromNode":"n_polinomi","fromSide":"right","toNode":"n_cambio_base","toSide":"bottom","label":"Ruffini = Base di Taylor"},
 		{"id":"e_spazi_app","fromNode":"n_spazi","fromSide":"bottom","toNode":"n_applicazioni","toSide":"top","label":"Trasformazioni Lineari"},
 		{"id":"e_pol_app","fromNode":"n_polinomi","fromSide":"bottom","toNode":"n_applicazioni","toSide":"left","label":"Nucleo (Kernel)"},
-		{"id":"e_app_auto","fromNode":"n_applicazioni","fromSide":"right","toNode":"n_autovalori","toSide":"left","label":"Studio della Matrice"},
+		{"id":"e_app_auto","toFloating":false,"fromNode":"n_applicazioni","fromSide":"right","toNode":"n_autovalori","toSide":"left","label":"Studio della Matrice"},
 		{"id":"e_pol_auto","toFloating":false,"fromNode":"n_polinomi","fromSide":"bottom","toNode":"n_autovalori","toSide":"top","label":"Matrice Compagna"},
 		{"id":"e_app_geo","fromNode":"n_applicazioni","fromSide":"bottom","toNode":"n_geometria","toSide":"top","label":"Significato Grafico"},
 		{"id":"e_spazi_orto","fromFloating":false,"toFloating":false,"fromNode":"n_applicazioni","fromSide":"bottom","toNode":"n_ortogonalita","toSide":"left","label":"Spazi Metrici"},
@@ -25,7 +25,7 @@
 		{"id":"e_span_sistemi","fromNode":"n_span","fromSide":"right","toNode":"n_sistemi","toSide":"top","label":"Combinare colonne per ottenere b"},
 		{"id":"e_cambio_matrici","fromNode":"n_cambio_base","fromSide":"bottom","toNode":"n_matrici","toSide":"right","label":"Le Matrici di Passaggio sono Invertibili"},
 		{"id":"e_matrici_sistemi","toFloating":false,"fromNode":"n_matrici","fromSide":"bottom","toNode":"n_sistemi","toSide":"top","label":"Soluzione Unica (Cramer)"},
-		{"id":"e_matrici_app","fromNode":"n_matrici","fromSide":"left","toNode":"n_applicazioni","toSide":"right","label":"Isomorfismo (Biunivoca)"}
+		{"id":"e_matrici_app","toFloating":false,"fromNode":"n_matrici","fromSide":"left","toNode":"n_applicazioni","toSide":"right","label":"Isomorfismo (Biunivoca)"}
 	],
 	"metadata":{
 		"version":"1.0-1.0",

@@ -51,7 +51,7 @@ Questo è l'indice principale per il corso di Algebra e Geometria. Ogni capitolo
 
 ## Capitolo 8: Prodotto Scalare e Teorema Spettrale
 - 📄 PDF: [[Slide/8. PRODOTTO SCALARE e TEOREMA SPETTRALE.pdf#page=1|Slide: Prodotto Scalare e Teorema Spettrale]]
-- 🧠 Appunti: [[Appunti/08 - Prodotto Scalare e Teorema Spettrale/00_Prodotto_Scalare_MOC|MOC Prodotto Scalare]]
+- 🧠 Appunti: [[00_Prodotto_Scalare_MOC|MOC Prodotto Scalare]]
 
 ## Capitolo 9: Geometria
 - 📄 PDF: [[Slide/9. GEOMETRIA.pdf#page=1|Slide: Geometria]]

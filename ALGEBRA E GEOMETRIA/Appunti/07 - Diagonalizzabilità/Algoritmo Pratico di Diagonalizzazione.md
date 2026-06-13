@@ -4,44 +4,66 @@ tags:
   - algebra/diagonalizzabilità
 aliases:
   - Algoritmo diagonalizzazione
+  - Ricerca della Matrice D e P
 ---
-
 # Algoritmo Pratico di Diagonalizzazione
 
-Sei all'esame, ti viene data una matrice $A \in M_n$ e ti si chiede di verificare se è diagonalizzabile e, se lo è, di trovare $D$ e $M$ (dove $D = M^{-1}AM$).
+L'applicazione del Criterio di Diagonalizzabilità a una matrice concreta richiede di eseguire una sequenza algoritmica di calcoli molto specifica. 
+Dato un esercizio del tipo: *"Stabilire se la matrice $A \in M_n$ è diagonalizzabile e, in caso affermativo, trovare una matrice invertibile $P$ e una matrice diagonale $D$ tali che $D = P^{-1} A P$"*, occorre seguire questi step:
 
-## Gli Step
+---
 
-1. **Trova il Polinomio Caratteristico**
-   Calcola $p(\lambda) = \det(A - \lambda I)$ e trovarne le radici.
-   *Se ci sono radici complesse non reali, fermati: NON è diagonalizzabile su $\mathbb{R}$.*
+## Step 1: Il Polinomio Caratteristico e gli Autovalori
+Costruisci la matrice $(A - \lambda I)$, sottraendo l'incognita $\lambda$ a tutti gli elementi della diagonale principale.
+Calcola il determinante $p(\lambda) = \det(A - \lambda I)$ per trovare il polinomio caratteristico.
+- **Risolvi $p(\lambda) = 0$** per determinare gli autovalori (le radici).
+- *Attenzione al Campo:* Se stai lavorando su $\mathbb{R}$ e trovi radici complesse coniugate (es. $\lambda^2 + 1 = 0$), puoi fermarti immediatamente: **la matrice NON è diagonalizzabile su $\mathbb{R}$** poiché non tutti gli autovalori appartengono al campo.
 
-2. **Determina le Molteplicità Algebriche ($m_a$)**
-   Segna quante volte compare ogni radice. Se hai $n$ radici distinte ($m_a=1$ per tutti), la matrice è diagonalizzabile di sicuro. Vai allo step 4.
+## Step 2: Molteplicità Algebriche
+Per ogni autovalore $\lambda_i$, annota la sua molteplicità algebrica $m_a(\lambda_i)$ (il numero di volte in cui è radice del polinomio).
+- **Shortcut (Autovalori Distinti):** Se la matrice ha dimensione $n$ e hai trovato $n$ autovalori **distinti** (cioè tutti con $m_a = 1$), per il Corollario del criterio sai già che **la matrice è diagonalizzabile con certezza**. Puoi saltare lo Step 3 e passare diretto allo Step 4.
 
-3. **Verifica le Molteplicità Geometriche ($m_g$)**
-   Per gli autovalori "problematici" con $m_a > 1$, calcola il rango della matrice $(A - \lambda I)$.
-   $m_g(\lambda) = n - \text{rg}(A - \lambda I)$.
-   - Se $m_g = m_a$ per tutti, la matrice è **diagonalizzabile**.
-   - Se per anche un solo autovalore $m_g < m_a$, fermati: **NON è diagonalizzabile**.
+## Step 3: Molteplicità Geometriche (Il test vero e proprio)
+Per ogni autovalore $\lambda_i$ che ha $m_a > 1$ (gli "autovalori doppi, tripli, ecc."), devi calcolarne la molteplicità geometrica:
+1. Sostituisci il numero $\lambda_i$ all'interno della matrice $(A - \lambda I)$.
+2. Calcola il **Rango** di questa matrice numerica.
+3. Determina $m_g(\lambda_i) = n - \text{rango}(A - \lambda_i I)$.
 
-4. **Trova le Basi degli Autospazi**
-   Per ogni autovalore $\lambda$, risolvi il sistema omogeneo $(A - \lambda I)X = \mathbf{0}$. L'insieme delle soluzioni è l'autospazio $E(\lambda)$. Trova una base per esso.
+> [!important] Il Bivio Decisivo
+> - Se per *anche un solo* autovalore risulta $m_g(\lambda_i) < m_a(\lambda_i)$, la procedura fallisce. **La matrice NON è diagonalizzabile.** L'esercizio è finito.
+> - Se per *ogni* autovalore risulta $m_g(\lambda_i) = m_a(\lambda_i)$, la matrice **è diagonalizzabile**. Procedi.
 
-5. **Costruisci le Matrici $D$ e $M$**
-   - **Matrice Diagonale $D$**: Metti gli autovalori trovati sulla diagonale principale (ripetuti tante volte quanto la loro $m_a$). Tutto il resto è zero.
-   - **Matrice di Passaggio $M$**: Metti in colonna gli autovettori di base trovati nello Step 4. 
-   *(Attenzione: L'ordine delle colonne in $M$ DEVE corrispondere all'ordine in cui hai posizionato gli autovalori in $D$!).*
+## Step 4: Calcolo degli Autospazi
+Per costruire la matrice di passaggio $P$, abbiamo bisogno degli autovettori.
+Per ogni autovalore $\lambda_i$, risolvi il sistema lineare omogeneo associato:
+$$ (A - \lambda_i I) \begin{pmatrix} x_1 \\ \dots \\ x_n \end{pmatrix} = \begin{pmatrix} 0 \\ \dots \\ 0 \end{pmatrix} $$
+Risolvendo il sistema, otterrai una base dell'autospazio $E_{\lambda_i}$. Raccogli tutti questi vettori di base in un unico insieme. Poiché la matrice è diagonalizzabile, l'unione di queste basi ti darà esattamente $n$ autovettori linearmente indipendenti.
 
-> [!question]- Esercizio Pratico
-> Mostra i passi logici (senza calcoli) per diagonalizzare una matrice $A$ $3\times 3$ con polinomio $(2-\lambda)^2(1-\lambda)=0$.
-> 
-> **Soluzione passo-passo:**
-> 1. Autovalori: $\lambda_1 = 2$ ($m_a = 2$), $\lambda_2 = 1$ ($m_a = 1$).
-> 2. Controlliamo $\lambda_1 = 2$: verifichiamo che $\text{rg}(A - 2I) = 3 - 2 = 1$. Se sì, è diagonalizzabile.
-> 3. Risolviamo $(A-2I)X = \mathbf{0}$ trovando base $(v_1, v_2)$. Risolviamo $(A-I)X = \mathbf{0}$ trovando base $(v_3)$.
-> 4. Costruiamo $M = (v_1 | v_2 | v_3)$. Costruiamo $D = \text{diag}(2, 2, 1)$.
+## Step 5: Costruzione di $D$ e $P$
+Ora hai tutti i pezzi per assemblare la risposta.
+- **La Matrice Diagonale $D$:** Costruisci una matrice $n \times n$ posizionando gli autovalori trovati sulla diagonale principale, *ripetuti un numero di volte pari alla loro molteplicità*. Tutti gli altri elementi sono zero.
+- **La Matrice di Passaggio $P$ (o $M$):** Costruisci una matrice le cui **colonne** sono i vettori della base di autovettori trovati allo Step 4.
 
+> [!warning] Ordine Vincolante!
+> L'ordine in cui metti gli autovettori nelle colonne di $P$ **DEVE corrispondere esattamente** all'ordine in cui hai posizionato i relativi autovalori sulla diagonale di $D$.
+> *Esempio: Se in $D$ il primo numero sulla diagonale è $\lambda = 2$, allora la prima colonna di $P$ deve essere obbligatoriamente un autovettore relativo all'autovalore 2.*
+
+---
+
+## Esempio Logico
+
+Consideriamo $A \in M_3(\mathbb{R})$ con polinomio $p(\lambda) = -\lambda(\lambda - 3)^2$.
+1. **Autovalori e $m_a$:** $\lambda_1 = 0$ ($m_a = 1$), $\lambda_2 = 3$ ($m_a = 2$).
+2. **Molteplicità geometrica:** Per $\lambda_1=0$, $m_a=1 \implies m_g=1$ per forza. Dobbiamo testare solo $\lambda_2=3$. 
+   Se calcolando $\text{rango}(A - 3I)$ otteniamo $1$, allora $m_g(3) = 3 - 1 = 2$.
+   Siccome $m_g(3) = m_a(3) = 2$, la matrice è diagonalizzabile.
+3. **Autospazi:** 
+   - $(A - 0I)x = \mathbf{0} \implies$ Troviamo 1 vettore $v_1$.
+   - $(A - 3I)x = \mathbf{0} \implies$ Troviamo 2 vettori $v_2, v_3$.
+4. **Assemblaggio:**
+   $P = \begin{pmatrix} | & | & | \\ v_1 & v_2 & v_3 \\ | & | & | \end{pmatrix}$ e $D = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 3 & 0 \\ 0 & 0 & 3 \end{pmatrix}$
+
+---
 ## Collegamenti
-- Back: [[00_Diagonalizzabilita_MOC|MOC Diagonalizzabilità]]
-- Previous: [[Criterio di Diagonalizzabilità]]
+* **Back:** [[00_Diagonalizzabilita_MOC|MOC Diagonalizzabilità]]
+* **Previous:** [[Criterio di Diagonalizzabilità]]

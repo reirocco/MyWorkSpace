@@ -5,7 +5,6 @@ tags:
 aliases:
   - MOC Diagonalizzabilità
 ---
-
 # MOC: Diagonalizzabilità
 
 In questo modulo affrontiamo uno dei problemi centrali dell'Algebra Lineare: trovare il sistema di riferimento (la base) rispetto al quale un endomorfismo assume la forma più semplice possibile, ovvero una matrice diagonale.
