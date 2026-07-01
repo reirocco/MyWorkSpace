@@ -56,6 +56,82 @@ Mentre nel piano euclideo le rette possono solo intersecarsi o essere parallele,
 > Rette incidenti e rette parallele (sia coincidenti che distinte) godono della proprietà di poter essere "schiacciate" su un singolo foglio: sono **Rette Complanari**. Le rette sghembe sono le uniche che sfuggono a un singolo piano e sono definite **Non Complanari**.
 
 ---
+### Scenario A: Rette Parallele Coincidenti
+Le due rette occupano lo stesso identico spazio geometrico, sovrapponendosi in ogni punto.
+
+* **Condizione sui Vettori:** I vettori direttori sono proporzionali (linearmente dipendenti).
+  $$\vec{v}_r = k \cdot \vec{v}_s$$
+* **Condizione sui Punti:** Condividono tutti i punti dello spazio. 
+* **Algoritmo di Verifica:** 1. Estrai un punto qualsiasi $P_s$ dalla retta $s$.
+  2. Sostituisci le sue coordinate nelle equazioni cartesiane di $r$.
+  3. Se il sistema è soddisfatto, le rette coincidono.
+---
+### Scenario B: Rette Parallele Distinte
+Le rette corrono nella stessa direzione senza mai incontrarsi. La loro distanza minima è strettamente maggiore di zero.
+
+* **Condizione sui Vettori:** I vettori direttori sono proporzionali (linearmente dipendenti).
+  $$\vec{v}_r = k \cdot \vec{v}_s$$
+* **Condizione sui Punti:** Non condividono alcun punto di intersezione.
+* **Geometria Associata:** Identificano **un unico piano complanare $\alpha$** che le contiene entrambe.
+* **Algoritmo di Verifica:**
+  1. Verificato il parallelismo dei vettori, estrai un punto $P_s$ da $s$.
+  2. Sostituisci $P_s$ nelle cartesiane di $r$. Se non è soddisfatto, le rette sono distinte.
+  3. Per trovare il piano comune $\alpha$, calcola il vettore congiungente $\overrightarrow{P_rP_s}$ e imposta il determinante $3 \times 3$ usando il **prodotto misto** (complanarietà):
+     $$\det \begin{pmatrix} X - P_s \\ \vec{v}_{\text{comune}} \\ \overrightarrow{P_rP_s} \end{pmatrix} = 0$$
+---
+### Scenario C: Rette Incidenti
+Le rette giacciono sullo stesso piano e si incrociano in un unico punto geometrico.
+
+* **Condizione sui Vettori:** I vettori direttori **non** sono proporzionali.
+  $$\vec{v}_r \neq k \cdot \vec{v}_s$$
+* **Condizione sui Punti:** Condividono esattamente un punto di intersezione $P$.
+* **Geometria Associata:** Identificano sempre un unico piano che le contiene entrambe.
+* **Algoritmo di Verifica:**
+  1. Metti a sistema le equazioni delle due rette (utilizzando la riduzione di **Gauss-Jordan** sulla matrice completa).
+  2. Se il sistema ammette un'unica soluzione compatibile, il sistema restituisce le coordinate del punto di intersezione $P(x,y,z)$.
+---
+### Scenario D: Rette Sghembe
+Questo scenario rompe completamente l'intuizione bidimensionale del piano: le rette non sono parallele, eppure non si intersecano mai poiché viaggiano a quote o altitudini differenti.
+
+* **Condizione sui Vettori:** I vettori direttori **non** sono proporzionali.
+  $$\vec{v}_r \neq k \cdot \vec{v}_s$$
+* **Condizione sui Punti:** Non hanno alcun punto in comune. Il sistema lineare associato risulta *incompatibile* (impossibile).
+* **Geometria Associata:** **Non esiste alcun piano** in grado di contenerle entrambe contemporaneamente.
+* **Algoritmo di Verifica:**
+  1. Costruisci la matrice unendo i vettori direttori $\vec{v}_r, \vec{v}_s$ e il vettore che unisce due punti qualsiasi delle rette $\overrightarrow{P_rP_s}$.
+  2. Calcola il determinante della matrice $3 \times 3$.
+  3. Se il determinante è **diverso da zero** ($\det \neq 0$), i tre vettori non sono complanari. Di conseguenza, le rette sono ufficialmente sghembe.
+
+
+### 2.1 Il Dubbio Cruciale: Determinante VS Prodotto Scalare
+Perché per trovare il piano $\beta$ (perpendicolare a $r$) non posso mettere in colonna $(X-P)$, $\vec{v}_1$ e $\vec{v}_2$ dentro un determinante?
+
+La risposta sta nella differenza drastica tra il concetto geometrico di **complanarietà** e quello di **ortogonalità**. Ognuno di questi due concetti richiede un operatore matematico specifico.
+
+#### 1. Il Determinante $3 \times 3$ (Costruisce Parallelismo)
+Quando inserisci in matrice il vettore generico $X-P$ e due vettori direttori $\vec{v}_1, \vec{v}_2$, stai imponendo un **prodotto misto nullo**. 
+
+$$\det \begin{pmatrix} x - x_0 & y - y_0 & z - z_0 \\ v_{1x} & v_{1y} & v_{1z} \\ v_{2x} & v_{2y} & v_{2z} \end{pmatrix} = 0$$
+
+* **Cosa dice alla matematica:** *"Trova quel piano che contiene il punto $P$ e si sviluppa **parallelamente** alle direzioni di $\vec{v}_1$ e $\vec{v}_2$ (i vettori scorrono SUL piano)."*
+* **Perché qui fallisce:** Il testo ti chiede un piano **perpendicolare** alla retta $r$, non parallelo. Se usassi il vettore direttore di $r$ dentro il determinante, costringeresti il piano a sdraiarsi in parallelo alla retta, ottenendo l'esatto contrario di ciò che ti è stato chiesto. Inoltre, ti mancherebbe una seconda direzione coerente per completare la terza riga della matrice.
+
+
+
+#### 2. Il Prodotto Scalare (Costruisce Perpendicolarità)
+Quando il testo usa la parola chiave **PERPENDICOLARE** (o ortogonale), l'attrezzo corretto è il prodotto scalare posto uguale a zero ($\vec{u} \cdot \vec{v} = 0$). Non serve un determinante perché non stai cercando direzioni che scorrono *sul* piano, ma stai usando l'unico vettore normale $\vec{n}$ che lo trafigge a $90^\circ$.
+
+$$\vec{n} \cdot \overrightarrow{PX} = 0 \implies a(x-x_0) + b(y-y_0) + c(z-z_0) = 0$$
+
+* **Cosa dice alla matematica:** *"Prendi il punto fisso $P$, e fai in modo che qualsiasi punto mobile $X(x,y,z)$ nello spazio formi un vettore $\overrightarrow{PX}$ che sia a $90^\circ$ rispetto al palo verticale $\vec{n}$."*
+* **Il vantaggio algebrico:** Non devi inventarti vettori di supporto o fare calcoli complessi con matrici. Ti basta un solo punto e un solo vettore.
+
+---
+
+>[!SUCCESS] 💡 Regola Mnemonica per lo Scritto
+>* **Testo chiede PARALLELO / COMPLANARE:** Ti servono frecce che scorrono *lungo* il piano $\implies$ Usi il **DETERMINANTE**.
+>* **Testo chiede PERPENDICOLARE / ORTOGONALE:** Ti serve una freccia che *trafigge* il piano $\implies$ Usi il **PRODOTTO SCALARE**.
+
 
 ## 3. Algoritmi di Passaggio
 

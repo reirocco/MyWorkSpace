@@ -41,7 +41,7 @@ Per ogni $A, B, C \in M_{m,n}$ e per ogni scalare $\lambda, \mu \in \mathbb{R}$:
 > 2) **Semigruppo**: Ha ==chiusura + associatività==. È esattamente quello che hai chiesto tu. L'operazione non esce dall'insieme e le parentesi non contano. 
 > 3) **Monoide**: Ha ==chiusura + associatività + elemento neutro==. È un semigruppo che in più ha un elemento "fantasma" che non fa nulla. 
 > 4) **Gruppo**: Ha ==chiusura + associatività + elemento neutro + elemento inverso==. La struttura completa di cui parlavamo prima. 
-> 5) **Gruppo Abeliano**: Ha== tutte e 4 le proprietà del gruppo + la commutatività.==
+> 5) **Gruppo Abeliano**: Ha ==tutte e 4 le proprietà del gruppo + la commutatività.==
 
 
 > [!question]- Esercizio Pratico
